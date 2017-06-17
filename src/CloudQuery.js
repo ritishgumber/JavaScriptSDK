@@ -841,6 +841,12 @@ class CloudQuery {
 
         var thisObj = this;
 
+        //default sort added
+        if (Object.keys(thisObj.sort).length === 0 && thisObj.sort.constructor === Object)
+            thisObj.sort = {
+                createdAt: 1
+            }
+
         var params = JSON.stringify({
             query: thisObj.query,
             select: thisObj.select,
