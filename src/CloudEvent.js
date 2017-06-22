@@ -24,6 +24,7 @@ CloudEvent.track = function(name, data, type, callback) {
     CloudEvent._getDeviceInformation({
         success: function(object) {
             data['device'] = object;
+            //add user information in each event:helpful for analytics and integration-services
             data.username = CB.CloudUser.current.username
             data.email = CB.CloudUser.current.email
             var obj = new CB.CloudObject('_Event');
