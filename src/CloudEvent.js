@@ -24,6 +24,8 @@ CloudEvent.track = function(name, data, type, callback) {
     CloudEvent._getDeviceInformation({
         success: function(object) {
             data['device'] = object;
+            data.username = CB.CloudUser.current.username
+            data.email = CB.CloudUser.current.email
             var obj = new CB.CloudObject('_Event');
             obj.ACL = new CB.ACL();
             obj.ACL.setPublicReadAccess(false);
@@ -58,7 +60,7 @@ CloudEvent.track = function(name, data, type, callback) {
 
 CloudEvent._getDeviceInformation = function(callback) {
     var obj = new Object();
-    if (!CB._isNode) 
+    if (!CB._isNode)
         obj['browser'] = _getBrowser();
     else
         obj['browser'] = 'node';

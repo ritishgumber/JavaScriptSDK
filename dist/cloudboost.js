@@ -21299,6 +21299,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    CloudEvent._getDeviceInformation({
 	        success: function success(object) {
 	            data['device'] = object;
+	            data.username = _CB2.default.CloudUser.current.username;
+	            data.email = _CB2.default.CloudUser.current.email;
 	            var obj = new _CB2.default.CloudObject('_Event');
 	            obj.ACL = new _CB2.default.ACL();
 	            obj.ACL.setPublicReadAccess(false);
