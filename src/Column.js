@@ -44,8 +44,15 @@ class Column {
      this.document.isRenamable = false;
      this.document.editableByMasterKey = false; 
      this.document.defaultValue = null;
+     this.document._id=CB._generateHash();
   };
 }
+
+Object.defineProperty(Column.prototype,'id',{
+    get: function(){
+        return this.document._id;
+    }
+});
 
 Object.defineProperty(Column.prototype,'name',{
     get: function() {

@@ -47,6 +47,7 @@ class CloudApp {
         this.onDisconnect(function() {
             CB.CloudApp._isConnected = false;
         });
+        CB.CloudEvent.track('app loaded',{appKey:CB.appKey});
     }
 
     onConnect(functionToFire) { //static function for initialisation of the app

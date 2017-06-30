@@ -25,8 +25,10 @@ CloudEvent.track = function(name, data, type, callback) {
         success: function(object) {
             data['device'] = object;
             //add user information in each event:helpful for analytics and integration-services
-            data.username = CB.CloudUser.current.username
-            data.email = CB.CloudUser.current.email
+            if (CB.CloudUser.current) {
+                data.username = CB.CloudUser.current.username
+                data.email = CB.CloudUser.current.email
+            }
             var obj = new CB.CloudObject('_Event');
             obj.ACL = new CB.ACL();
             obj.ACL.setPublicReadAccess(false);

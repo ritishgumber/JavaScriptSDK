@@ -8516,6 +8516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.onDisconnect(function () {
 	                _CB2.default.CloudApp._isConnected = false;
 	            });
+	            _CB2.default.CloudEvent.track('app loaded', { appKey: _CB2.default.appKey });
 	        }
 	    }, {
 	        key: 'onConnect',
@@ -16071,7 +16072,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.document.isRenamable = false;
 	    this.document.editableByMasterKey = false;
 	    this.document.defaultValue = null;
+	    this.document._id = _CB2.default._generateHash();
 	};
+
+	Object.defineProperty(Column.prototype, 'id', {
+	    get: function get() {
+	        return this.document._id;
+	    }
+	});
 
 	Object.defineProperty(Column.prototype, 'name', {
 	    get: function get() {
@@ -21299,8 +21307,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    CloudEvent._getDeviceInformation({
 	        success: function success(object) {
 	            data['device'] = object;
-	            data.username = _CB2.default.CloudUser.current.username;
-	            data.email = _CB2.default.CloudUser.current.email;
+	            //add user information in each event:helpful for analytics and integration-services
+	            if (_CB2.default.CloudUser.current) {
+	                data.username = _CB2.default.CloudUser.current.username;
+	                data.email = _CB2.default.CloudUser.current.email;
+	            }
 	            var obj = new _CB2.default.CloudObject('_Event');
 	            obj.ACL = new _CB2.default.ACL();
 	            obj.ACL.setPublicReadAccess(false);
