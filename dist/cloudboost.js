@@ -6831,13 +6831,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return deferred.promise;
 	};
 
-	_CB2.default._generateHash = function () {
-	    var hash = "";
+	_CB2.default._generateId = function () {
+	    var id = "";
 	    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	    for (var i = 0; i < 8; i++) {
-	        hash = hash + possible.charAt(Math.floor(Math.random() * possible.length));
+	        id = id + possible.charAt(Math.floor(Math.random() * possible.length));
 	    }
-	    return hash;
+	    return id;
 	};
 
 	_CB2.default._isJsonString = function (str) {
@@ -8516,7 +8516,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.onDisconnect(function () {
 	                _CB2.default.CloudApp._isConnected = false;
 	            });
-	            _CB2.default.CloudEvent.track('app loaded', { appKey: _CB2.default.appKey });
+	            _CB2.default.CloudEvent.track('App Loaded', { appKey: _CB2.default.appKey });
 	        }
 	    }, {
 	        key: 'onConnect',
@@ -8593,7 +8593,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/* WEBPACK VAR INJECTION */(function(global) {var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	if (!CB._isNode) {
 	    //Socket.io Client library
@@ -16072,7 +16072,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.document.isRenamable = false;
 	    this.document.editableByMasterKey = false;
 	    this.document.defaultValue = null;
-	    this.document._id = _CB2.default._generateHash();
+	    this.document._id = _CB2.default._generateId();
 	};
 
 	Object.defineProperty(Column.prototype, 'id', {
@@ -16889,7 +16889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.document.ACL = new _CB2.default.ACL(); //ACL(s) of the document
 	        this.document._type = 'custom';
 	        this.document.expires = null;
-	        this.document._hash = _CB2.default._generateHash();
+	        this.document._hash = _CB2.default._generateId();
 
 	        if (!id) {
 	            this.document._modifiedColumns = ['createdAt', 'updatedAt', 'ACL', 'expires'];
@@ -17249,7 +17249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        eventType = eventType.toLowerCase();
 	        if (eventType === 'created' || eventType === 'updated' || eventType === 'deleted') {
 	            //var timestamp = Date.now();
-	            var timestamp = _CB2.default._generateHash();
+	            var timestamp = _CB2.default._generateId();
 	            var payload = {
 	                room: (_CB2.default.appId + 'table' + tableName + eventType).toLowerCase() + timestamp,
 	                sessionId: _CB2.default._getSessionId(),
@@ -17305,7 +17305,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        eventType = eventType.toLowerCase();
 	        //        var timestamp = Date.now();
-	        var timestamp = _CB2.default._generateHash();
+	        var timestamp = _CB2.default._generateId();
 	        if (eventType === 'created' || eventType === 'updated' || eventType === 'deleted') {
 	            _CB2.default.Socket.emit('leave-object-channel', {
 	                event: (_CB2.default.appId + 'table' + tableName + eventType).toLowerCase(),

@@ -628,13 +628,13 @@ CB._bulkObjFileCheck = function(array) {
     return deferred.promise;
 };
 
-CB._generateHash = function() {
-    var hash = "";
+CB._generateId = function() {
+    var id = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (var i = 0; i < 8; i++) {
-        hash = hash + possible.charAt(Math.floor(Math.random() * possible.length));
+        id = id + possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    return hash;
+    return id;
 };
 
 CB._isJsonString = function(str) {

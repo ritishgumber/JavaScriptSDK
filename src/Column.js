@@ -44,7 +44,7 @@ class Column {
      this.document.isRenamable = false;
      this.document.editableByMasterKey = false; 
      this.document.defaultValue = null;
-     this.document._id=CB._generateHash();
+     this.document._id=CB._generateId();
   };
 }
 

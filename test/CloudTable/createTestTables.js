@@ -164,6 +164,67 @@ describe("Should Create All Test Tables", function(done) {
         });
     });
 
+        it("should update column name ",function(done){
+
+        var table=new CB.CloudTable('NewTable');
+        var column=new CB.Column('a');
+        table.addColumn(column);
+        column=new CB.Column('b');
+        table.addColumn(column);
+        table.save().then(function(table){
+            //new table created
+            //add sample data;
+            var obj1=new CB.CloudObject('NewTable');
+            obj1.set('a','a1');
+            obj1.set('b','b1');
+            var obj2=new CB.CloudObject('NewTable');
+            obj2.set('a','a2');
+            obj2.set('b','b2');
+            var obj3=new CB.CloudObject('NewTable');
+            obj3.set('a','a3');
+            obj3.set('b','b3');
+            var obj4=new CB.CloudObject('NewTable');
+            obj4.set('a','a4');
+            obj4.set('b','b4');
+            CB.CloudObject.saveAll([obj1,obj2,obj3,obj4]).then(function(res){
+                column = table.getColumn('a');
+                column.name='anew';
+                table.updateColumn(column);
+                column = table.getColumn('b');
+                column.name='bnew';
+                table.updateColumn(column);
+                //save updated table
+                table.save().then(function(newTable){
+                    var query=new CB.CloudQuery('NewTable');
+                    query.find().then(function(obj){
+                        var documentArr=_.pluck(obj,'document');
+                        var keysArr=_.map(documentArr,(doc)=>{
+                            return _.allKeys(doc);
+                        })
+                        var tableFields=_.uniq(_.flatten(keysArr));
+                        if(tableFields.indexOf('a')===-1&&tableFields.indexOf('b')===-1)
+                            done()
+                        else
+                            throw 'Column not updated'
+                    },function(err){
+                        throw err;
+                    })                 
+                },function(err){
+                    throw err;
+                })
+                
+
+                },function(err){
+                    console.log(err);
+            });
+            
+
+        },function(err){
+            throw err;
+        })
+
+    });
+
     it("should create table student4", function(done) {
 
         this.timeout(50000);

@@ -11,7 +11,7 @@ class CloudObject {
         this.document.ACL = new CB.ACL(); //ACL(s) of the document
         this.document._type = 'custom';
         this.document.expires = null;
-        this.document._hash = CB._generateHash();
+        this.document._hash = CB._generateId();
 
         if (!id) {
             this.document._modifiedColumns = ['createdAt', 'updatedAt', 'ACL', 'expires'];
@@ -355,7 +355,7 @@ CloudObject.on = function(tableName, eventType, cloudQuery, callback, done) {
         eventType = eventType.toLowerCase();
         if (eventType === 'created' || eventType === 'updated' || eventType === 'deleted') {
             //var timestamp = Date.now();
-            var timestamp = CB._generateHash();
+            var timestamp = CB._generateId();
             var payload = {
                 room: (CB.appId + 'table' + tableName + eventType).toLowerCase() + timestamp,
                 sessionId: CB._getSessionId(),
@@ -421,7 +421,7 @@ CloudObject.off = function(tableName, eventType, done) {
 
         eventType = eventType.toLowerCase();
         //        var timestamp = Date.now();
-        var timestamp = CB._generateHash();
+        var timestamp = CB._generateId();
         if (eventType === 'created' || eventType === 'updated' || eventType === 'deleted') {
             CB.Socket.emit('leave-object-channel', {
                 event: (CB.appId + 'table' + tableName + eventType).toLowerCase(),

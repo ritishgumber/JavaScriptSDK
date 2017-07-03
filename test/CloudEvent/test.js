@@ -1,12 +1,29 @@
 describe("CloudEvent", function() {
     var username = 'ritishgumber';
     var passwd = 'ritish4321';
+
+    it("should track 'App Loaded' event.", function(done) {
+        CB.CloudApp.init(URL, CB.appId, CB.masterKey);
+
+        this.timeout(30000);
+
+        setTimeout(() => {
+            var query = new CB.CloudQuery('_Event');
+            query.equalTo('name', 'App Loaded');
+            query.findOne().then(function(obj) {
+                if (obj.get('name') === 'App Loaded')
+                    done();
+                }
+            , function(err) {
+                done(err);
+            });
+        }, 10000)
+
+    });
+
     it("should track signup event.", function(done) {
         CB.CloudApp.init(URL, CB.appId, CB.masterKey);
-        if (CB._isNode) {
-            done();
-            return;
-        }
+        
 
         this.timeout(30000);
 
@@ -32,10 +49,7 @@ describe("CloudEvent", function() {
 
     it("Should track login event", function(done) {
 
-        if (CB._isNode) {
-            done();
-            return;
-        }
+        
 
         this.timeout(30000);
 
