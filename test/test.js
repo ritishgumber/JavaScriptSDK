@@ -2895,6 +2895,11 @@ describe("CloudEvent", function() {
     });
 
     it("should track signup event.", function(done) {
+         if (CB._isNode) {		         
+             done();		
+             return;		
+        }
+        
         CB.CloudApp.init(URL, CB.appId, CB.masterKey);
         
 
@@ -2921,9 +2926,11 @@ describe("CloudEvent", function() {
     });
 
     it("Should track login event", function(done) {
-
+        if (CB._isNode) {		         
+             done();		
+             return;		
+        }
         
-
         this.timeout(30000);
 
         var obj = new CB.CloudUser();
