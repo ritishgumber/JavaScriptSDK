@@ -42,7 +42,7 @@ describe("Table Tests", function (done) {
     });
 
      it("should update column name ",function(done){
-        this.timeout(50000);
+        this.timeout(20000);
         var table=new CB.CloudTable('NewTable');
         var column=new CB.Column('a');
         table.addColumn(column);
